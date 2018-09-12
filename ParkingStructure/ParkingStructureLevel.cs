@@ -15,13 +15,13 @@ namespace OOPDemo.ParkingStructure
         public List<ParkingSpot> ParkingSpots { get; set; }
         public List<ParkingLevel> ParkingLevels { get; set; }
         public Guid Id { get; set; }
+        List<Driver> GPSpotOwners = new List<Driver>();
+        List<Driver> VPSpotOwners = new List<Driver>();
+        List<Driver> FFSpotOwners = new List<Driver>();
 
         public ParkingSpot AddCar(ParkingType parkingType, Driver driver, ParkingSpot parkingSpot)
         //public List<ParkingSpot> AddCar(ParkingType parkingType, Driver driver, ParkingSpot parkingSpot)
         {
-            List<Driver> GeneralParkingSpotOwners = new List<Driver>();
-            List<Driver> ValetParkingSpotOwners = new List<Driver>();
-            List<Driver> FrequentFlyerParkingSpotOwners = new List<Driver>();
             List<ParkingSpot> parkingSpots = new List<ParkingSpot>();
             //var Id = Guid.NewGuid;
 
@@ -48,13 +48,13 @@ namespace OOPDemo.ParkingStructure
             switch (parkingType)
             {
                 case ParkingType.General:
-                    GeneralParkingSpotOwners.Add(driverInfo);
+                    GPSpotOwners.Add(driverInfo);
                     break;
                 case ParkingType.Valet:
-                    ValetParkingSpotOwners.Add(driverInfo);
+                    VPSpotOwners.Add(driverInfo);
                     break;
                 case ParkingType.FrequentFlyer:
-                    FrequentFlyerParkingSpotOwners.Add(driverInfo);
+                    FFSpotOwners.Add(driverInfo);
                     break;
                 default:
                     throw new Exception("incorrect parking spot type");
