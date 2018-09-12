@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,13 +14,16 @@ namespace OOPDemo.ParkingStructure
         public List<Driver> FrequentFlyerParkingSpotOwners { get; set; }
         public List<ParkingSpot> ParkingSpots { get; set; }
         public List<ParkingLevel> ParkingLevels { get; set; }
+        public Guid Id { get; set; }
 
-        public List<ParkingSpot> AddCar(ParkingType parkingType, Driver driver, ParkingSpot parkingSpot)
+        public ParkingSpot AddCar(ParkingType parkingType, Driver driver, ParkingSpot parkingSpot)
+        //public List<ParkingSpot> AddCar(ParkingType parkingType, Driver driver, ParkingSpot parkingSpot)
         {
             List<Driver> GeneralParkingSpotOwners = new List<Driver>();
             List<Driver> ValetParkingSpotOwners = new List<Driver>();
             List<Driver> FrequentFlyerParkingSpotOwners = new List<Driver>();
             List<ParkingSpot> parkingSpots = new List<ParkingSpot>();
+            //var Id = Guid.NewGuid;
 
             Driver driverInfo = new Driver
             {
@@ -30,12 +33,13 @@ namespace OOPDemo.ParkingStructure
 
             ParkingSpot parking = new ParkingSpot
             {
+                Id = Guid.NewGuid(),
                 GetParkingType = parkingSpot.GetParkingType,
                 ParkingSpotNumber = parkingSpot.ParkingSpotNumber,
                 ParkingStructureLevel = parkingSpot.ParkingStructureLevel,
                 HoursParked = parkingSpot.HoursParked,
                 StartTime = DateTime.Now,
-                Available = false
+                Unavailable = true
             };
 
             parkingSpots.Add(parking);
@@ -63,15 +67,15 @@ namespace OOPDemo.ParkingStructure
             //     var eachElement = p;
             //    parkingList.Add(eachElement);
             //}
-            return parkingSpots; //returning ticket with start time
+            return parking; //returning ticket with start time
         }
+
 
         public void RemoveCar(ParkingType parkingType, Driver parking, ParkingSpot parkingSpot)
         {
             switch (parkingType)
             {
                 case ParkingType.General:
-                    // GeneralParkingSpotOwners.Find(x => x.LicensePlate == parking.LicensePlate);
                     GeneralParkingSpotOwners.Remove(parking);
                     break;
                 case ParkingType.Valet:
